@@ -37,8 +37,8 @@ creator = tk.Label(
 creator.place(relx=0, rely=0.92, relwidth=0.4, relheight=0.06)
 
 # Mortgage value
-value_label = tk.Label(frame, text="Mortgage Value", background='#2E9AFE')
-value_label.place(relx=0.373, rely=0.10, relwidth=0.25, relheight=0.09)
+value_label = tk.Label(frame, text="Mortgage Value  $")
+value_label.place(relx=0.373, rely=0.10, relwidth=0.27, relheight=0.09)
 
 value = tk.Entry(frame, bg='#BDBDBD')
 value.place(relx=0.32, rely=0.20, relwidth=0.35, relheight=0.1)
