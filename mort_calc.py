@@ -2,9 +2,13 @@ import tkinter as tk
 
 
 # Function to return monthly payments
-def get_mort(interest):
+def get_mort(interest, value, years):
     print("Button clicked")
-    print(interest)
+    interest = float(interest)
+    value = float(value)
+    years = float(years)
+    monthly_payment = value * ((interest/12)*(1 + ((interest/12)**(years*12)))/(1 + ((interest/12))**(years*12)) - 1)
+    print(monthly_payment)
 
 
 height = 400
@@ -54,11 +58,11 @@ interest.place(relx=0.12, rely=0.48, relwidth=0.33, relheight=0.1)
 num_years_label = tk.Label(frame, text="Number of Years")
 num_years_label.place(relx=0.595, rely=0.38, relwidth=0.255, relheight=0.09)
 
-interest = tk.Entry(frame, bg='#BDBDBD')
-interest.place(relx=0.54, rely=0.48, relwidth=0.35, relheight=0.1)
+years = tk.Entry(frame, bg='#BDBDBD')
+years.place(relx=0.54, rely=0.48, relwidth=0.35, relheight=0.1)
 
 # Get Mortgage Button
-button = tk.Button(frame, text='Get Mortgage', bg='#E6E6E6', command=lambda: get_mort(value.get()))
+button = tk.Button(frame, text='Get Mortgage', bg='#E6E6E6', command=lambda: get_mort(interest.get(), value.get() , years.get()))
 button.place(relx=0.30, rely=0.73, relwidth=0.4, relheight=0.12)
 
 root.mainloop()
