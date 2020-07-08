@@ -4,7 +4,7 @@ import numpy as np
 
 
 # Function to return monthly payments
-def get_mort(interest, value, years, insurance):
+def get_mort(interest, value, years, insurance, hoa):
     print("Button clicked")
 
     while True:
@@ -13,11 +13,13 @@ def get_mort(interest, value, years, insurance):
             interest = interest/100
             value = float(value)
             years = float(years)
+            hoa = float(hoa)
             insurance = float(insurance)
             insurance = insurance/100
 
-            if interest > 0 and value > 0 and years > 0 and insurance >= 0:
+            if interest > 0 and value > 0 and years > 0 and insurance >= 0 and hoa >=0:
                 monthly_payment = -1 * np.pmt(interest/12, years * 12, value)
+                monthly_payment += hoa
                 if insurance !=0:
                     to_add = monthly_payment * insurance
                     monthly_payment += to_add
@@ -67,10 +69,10 @@ creator.place(relx=0, rely=0.92, relwidth=0.44, relheight=0.06)
 
 # Mortgage value
 value_label = tk.Label(frame, text="Mortgage Value  $")
-value_label.place(relx=0.362, rely=0.04, relwidth=0.27, relheight=0.11)
+value_label.place(relx=0.16, rely=0.04, relwidth=0.27, relheight=0.11)
 
 value = tk.Entry(frame, bg='#BDBDBD')
-value.place(relx=0.32, rely=0.15, relwidth=0.35, relheight=0.145)
+value.place(relx=0.12, rely=0.15, relwidth=0.35, relheight=0.145)
 
 # Interest
 interest_label = tk.Label(frame, text="Interest  %")
@@ -79,12 +81,18 @@ interest_label.place(relx=0.19, rely=0.39, relwidth=0.19, relheight=0.11)
 interest = tk.Entry(frame, bg='#BDBDBD')
 interest.place(relx=0.12, rely=0.5, relwidth=0.33, relheight=0.145)
 
+#HOA Fees
+hoa_label = tk.Label(frame, text="HOA Fees")
+hoa_label.place(relx=0.6, rely=0.39, relwidth=0.19, relheight=0.11)
+
+hoa = tk.Entry(frame, bg='#BDBDBD')
+hoa.place(relx=0.595, rely=0.5, relwidth=0.193, relheight=0.145)
 # Num years
 num_years_label = tk.Label(frame, text="Number of Years")
-num_years_label.place(relx=0.595, rely=0.39, relwidth=0.255, relheight=0.11)
+num_years_label.place(relx=0.595, rely=0.04, relwidth=0.255, relheight=0.11)
 
 years = tk.Entry(frame, bg='#BDBDBD')
-years.place(relx=0.54, rely=0.5, relwidth=0.35, relheight=0.145)
+years.place(relx=0.54, rely=0.15, relwidth=0.35, relheight=0.145)
 
 insurance_label = tk.Label(frame, text="Insurance  %")
 insurance_label.place(relx=0.55, rely=0.75, relwidth=0.25, relheight=0.2)
@@ -97,7 +105,7 @@ mid_frame.place(relx=0.277, rely=0.6, relwidth=0.45, relheight=0.1)
 
 # Get Mortgage Button
 button = tk.Button(mid_frame, text='Get Mortgage', bg='#E6E6E6',
-                   command=lambda: get_mort(interest.get(), value.get(), years.get(), slider.get()))
+                   command=lambda: get_mort(interest.get(), value.get(), years.get(), hoa.get(), slider.get()))
 button.place(relx=0.02, rely=0.15, relwidth=0.96, relheight=0.75)
 
 lower_frame = tk.Frame(root, bg='#2E9AFE')
