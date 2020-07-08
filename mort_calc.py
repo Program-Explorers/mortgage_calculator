@@ -78,10 +78,13 @@ num_years_label.place(relx=0.595, rely=0.38, relwidth=0.255, relheight=0.09)
 years = tk.Entry(frame, bg='#BDBDBD')
 years.place(relx=0.54, rely=0.48, relwidth=0.35, relheight=0.1)
 
+slider = tk.Scale(frame, from=0, to=3, orient='horizontal', resolution=0.1)
+slider.place(relx=0.32, rely=0.65, relwidth=0.35, relheight=0.15)
+
 # Get Mortgage Button
 button = tk.Button(frame, text='Get Mortgage', bg='#E6E6E6',
                    command=lambda: get_mort(interest.get(), value.get(), years.get()))
-button.place(relx=0.30, rely=0.73, relwidth=0.4, relheight=0.12)
+button.place(relx=0.3, rely=0.82, relwidth=0.4, relheight=0.12)
 
 lower_frame = tk.Frame(root, bg='#2E9AFE')
 lower_frame.place(relx=0.5, rely=0.8, relwidth=0.75, relheight=0.1, anchor='n')
