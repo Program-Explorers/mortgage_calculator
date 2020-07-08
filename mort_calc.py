@@ -1,17 +1,30 @@
 import tkinter as tk
+from tkinter import font
 import numpy as np
 
 
 # Function to return monthly payments
 def get_mort(interest, value, years):
     print("Button clicked")
-    interest = float(interest)
-    interest = interest/100
-    value = float(value)
-    years = float(years)
 
-    monthly_payment = -1 * np.pmt(interest/12, years * 12, value)
-    print(monthly_payment.round(2))
+    while True:
+        try:
+            interest = float(interest)
+            interest = interest/100
+            value = float(value)
+            years = float(years)
+
+            monthly_payment = -1 * np.pmt(interest/12, years * 12, value)
+            display_label['text'] = '$'+str(monthly_payment.round(2))
+
+
+
+        except:
+            display_label['text'] = 'Please type a number'
+            break
+
+        else:
+            break
 
 
 height = 400
@@ -19,7 +32,7 @@ width = 500
 
 root = tk.Tk()
 
-root.title("Mortgage Calculator")
+root.title("Monthly Mortgage Calculator")
 
 # canvas which determines size of window
 canvas = tk.Canvas(root, height=height, width=width)
@@ -32,16 +45,17 @@ background_label.place(relwidth=1, relheight=1)
 
 # Frame
 frame = tk.Frame(root, bg='#2E9AFE')
-frame.place(relx=0.08, rely=0.08, relwidth=0.85, relheight=0.70)
+frame.place(relx=0.08, rely=0.07, relwidth=0.85, relheight=0.70)
 
 # Made by Program Explorers
 creator = tk.Label(
     root,
+    font=('Futura', 15),
     text="Made by Program Explorers",
     foreground="#6E6E6E",  # Set the text color to white
     background="#04B431"  # Set the background color to black
 )
-creator.place(relx=0, rely=0.92, relwidth=0.4, relheight=0.06)
+creator.place(relx=0, rely=0.92, relwidth=0.44, relheight=0.06)
 
 # Mortgage value
 value_label = tk.Label(frame, text="Mortgage Value  $")
@@ -69,4 +83,9 @@ button = tk.Button(frame, text='Get Mortgage', bg='#E6E6E6',
                    command=lambda: get_mort(interest.get(), value.get(), years.get()))
 button.place(relx=0.30, rely=0.73, relwidth=0.4, relheight=0.12)
 
+lower_frame = tk.Frame(root, bg='#2E9AFE')
+lower_frame.place(relx=0.5, rely=0.8, relwidth=0.75, relheight=0.1, anchor='n')
+
+display_label = tk.Label(lower_frame)
+display_label.place(relx=0.016, rely=0.12, relwidth=0.965, relheight=0.75)
 root.mainloop()
